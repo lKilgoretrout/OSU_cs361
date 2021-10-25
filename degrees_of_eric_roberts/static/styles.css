@@ -1,0 +1,84 @@
+.nav {
+  overflow: hidden;
+  background-color: #3333cc;
+}
+
+.nav a {
+  float: left;
+  color: gray;
+  text-align: center;
+  padding: 4px 5px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.nav a:hover {
+  background-color: #8533ff;
+  color: white;
+}
+
+.nav a.active {
+  background-color: #ff00ff;
+  color: white;
+}
+
+
+
+form {
+	width: 20%;
+	margin: auto;
+	display:inline-block;
+	line-height: 15px;
+	background-color: rebeccapurple;
+	font-size:x-small;
+	color: lavender;	
+}
+
+
+
+div.index, div.results {
+	background-image: url('/static/ericRobertsBust.jpg');	
+}
+
+div.failure {
+    background-image: url('/static/ER_surprised_erdb.png');
+}
+
+div.text_container {
+  margin-right: 50%;
+  background-color: lavender;
+  border: 1px solid purple;
+}
+
+div.movie {
+    max-width: 25%;
+    background-color: lavender;
+    border: 1px solid purple;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+}
+
+div img {
+    max-width: 75%;
+}
+
+span.caption {
+    display: block;
+}
+
+div.degrees-number {
+    font-size: 500px;
+    text-align: center;
+}
+
+p.index, 
+h1.index,
+h2.index,
+b.index,
+span.index
+ {
+	font-size:x-small;
+	background-color:lavender;
+}
+
