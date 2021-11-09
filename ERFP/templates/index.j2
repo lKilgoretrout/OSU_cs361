@@ -1,0 +1,75 @@
+{% extends 'base.j2' %}
+{% block content %}
+
+<div class="background">
+        
+	<h1>Eric Roberts Fan Page</h1>
+	 
+	<p>Welcome to the Eric Roberts Fan Page (ERFP)</p>
+	
+	<b>What is the Eric Roberts Fan Page ? </b>
+	<p>The ERFP (pronounced "erfp") a online database of all of Eric Roberts movies 
+	Judging by the most reliable metric of the caliber of an actor: number of movies starred in,  
+	ER is one of the greatest actors ever. What his opus lacks in quality it more than makes up for in sheer quantity 
+	The ERFP is created from a subset of of the Internet Movie Database's dataset and 
+	allows the user to see Eric's whole cannon and find out more info about Eric Roberts movies than  you ever wanted to know!
+	</p>
+	
+	<br>
+	<b>HOW DO I USE THE ERFP?</b><br>
+	<p>Enter a name in the text box below 
+	and click submit and you will be taken to the results page. That's it! 
+	You can also scroll down the master list and click on the movie title !</p>
+        
+        <br>
+		<form action="/search" method="GET">  
+	    <fieldset>
+		<legend>Search ERFP</legend>
+		<label>Movie Name:
+			<input type="text" name="movie_name" size="15" maxlength="100">
+		</label>
+		<input type="submit" value="Submit"/>
+	</fieldset>
+	</form>
+    
+	<table>
+	
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Year</th>
+				<th>Genre</th>
+			
+			</tr>
+			
+		<tbody>
+			
+			{% for movie in movies %}
+			<tr>
+			    {% for i in range(3) %}
+				    {% if i==0 %}
+					<td> <a href="{{url_for('results', movie=movies[movie][i])}}"</a> {{movies[movie][i]}} </a></td>
+					{% endif %}
+					
+					{% if i==1 %}
+					<td>{{movies[movie][i]}}</td>
+					{% endif %}
+					
+					{% if i==2 %}
+					<td>{{movies[movie][i]}}</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+	<br>
+	<p>Here is a little demo of a friend's meme image service...</p>
+	{% if meme %}
+		<img class="meme" src="{{meme}}"/>
+	{% endif %}	
+</div>
+
+
+{% endblock %}

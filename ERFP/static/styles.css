@@ -1,0 +1,63 @@
+
+
+form {
+	width: 25%;
+	margin: auto;
+	display:inline-block;
+	line-height: 15px;
+	background-color: rebeccapurple;
+	font-size:x-small;
+	color: lavender;	
+}
+
+.genre {
+	background-color: rgb(139, 12, 207);
+	
+}
+
+.background {
+	background-image: url('/static/ericRobertsBust.jpg');	
+}
+
+div.failure {
+    background-image: url('/static/ER_surprised_erdb.png');
+}
+
+table, td, tr, thead {
+	border: 1px solid rebeccapurple;
+	border-collapse: collapse;
+	background-color: lavender;
+	text-align: left;
+	font-size: x-small;
+}
+
+img.meme {
+	max-width = 25vw;
+	max-height = 25vw;
+}
+
+p, b {
+	width:420px;
+    word-wrap: break-word;
+	font-size:x-small;
+	background-color:rebeccapurple;
+	color: white;
+}
+
+div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 75vw;
+}
+
+img.poster {
+    width: 75vw;
+    background-color: grey;
+}
+.caption {
+    /* Make the caption a block so it occupies its own line. */
+    display: block;
+	background-color: rebeccapurple;
+	font-size: small;
+}

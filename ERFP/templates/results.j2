@@ -1,0 +1,24 @@
+{% extends 'base.j2' %}
+{% block content %}
+<div class="background">
+	<a href="{{ url_for('index') }}"><button style="background-color: purple;">Go back to main page</button></a>
+        
+	<h1>{{movie_name}}({{year}})</h1>
+	<b class="genre">{{genre}}</b>
+	<br>
+	<div class="item">
+		<span class="caption">{{synopsis['overview']}} </span>
+		{% if poster %}
+		<img class="poster" src="{{poster}}"/>
+		{% endif %}
+		
+		{% if not poster %}
+		<img src='/static/no_image_available.png'>
+		{% endif %}
+	</div>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>	
+{% endblock %}
+	
+	

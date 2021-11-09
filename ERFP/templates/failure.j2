@@ -1,0 +1,16 @@
+{% extends 'base.j2' %}
+{% block content %}
+
+<div class="failure">       
+        
+		<h1>Results for {{movie_name}}</h1>
+		<p>That movie is not in the ERFP. Make sure you spelled the movie name and capitalized it correctly ! </p>
+		
+        <a href="{{ url_for('index') }}"><button style="background-color: purple;">Go back to main page and try again</button></a>
+        
+        
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+
+ {% endblock %}
