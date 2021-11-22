@@ -5,7 +5,7 @@ import json, os , requests
 app = Flask(__name__)
 api = Api(app)
 
-IMDB_key = "k_2y19kz17"
+IMDB_key = ""
 
 class MoviePosterService(Resource):
     
