@@ -5,7 +5,7 @@ from flask.globals import request
 app = Flask(__name__)
 
 
-IMDB_key = "k_wu9qyj05"
+IMDB_key = ""
 
 
 
