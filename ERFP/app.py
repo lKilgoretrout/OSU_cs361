@@ -1,91 +1,38 @@
-import os, requests
+import os, api_keys
+from services import *
 from flask import Flask, render_template, url_for
-from load_data import load_data  # for loading IMDB values
 from flask.globals import request
+
 app = Flask(__name__)
-
-
-IMDB_key = ""
-
-
-
-
-# @lkilgoretrout Here is the endpoint you can access to get the meme resource: 
-# https://fine-volt-331118.ue.r.appspot.com/  I decided to keep my project and 
-# service separate after all lol Responses are in the format:
- # {"meme_url":"https://i.redd.it/1dyc8tfw3ox71.jpg%22,%22source%22:%22ProgrammerHumor%22%7D,
- # where meme_url is the link and source is the subreddit where the image is pulled from. 
- # It works flawlessly as of now, but there are a few minor improvements I would like to 
- # make in the next sprint.
-
+IMDB_key = api_keys.IMDB_KEY
 
 # get Eric Roberts from from pickle file (IDMB database values)
 # put into a global dictionary 
+global ER_movies
 ER_movies = load_data()    # e.g. {'tt8435252': ['Broken Church', '2015', 'Drama']...}
-
-def get_meme():
-    '''response Example: {"meme_url":"https://i.redd.it/1dyc8tfw3ox71.jpg","source":"ProgrammerHumor"}'''
-    response = requests.get('https://fine-volt-331118.ue.r.appspot.com/')
-    print(response.text)
-    response_json = response.json()
-    
-    meme = response_json["meme_url"]
-    
-    return meme
-    
-    
-    
-    
-# chunlin's IMDB synopsis service:
-def request_synopsis(imdb_id):
-    '''INPUT: imdb_id, e.g. "tt123456"
-       OUTPUT: json object '''
-    # sends imdb database id and returns synopsis (string) from IMDB API
-    response = requests.post('https://chunlin-api.ue.r.appspot.com/imdb', json={"IMDB":imdb_id})
-    print(response.text)
-    synopsis = response.json()
-    
-    return synopsis
-
-
-def request_movie_poster(imdb_id):
-    '''INPUT imdb_id, e.g. "tt123456" and sends a json GET request
-       OUTPUT a <img> link inside a JSON response'''
-    response = requests.get("http://127.0.0.1:6000/poster", json={"imdb_id":imdb_id})
-    print(response.text)
-    response_json = response.json()
-    
-    try:
-        poster = response_json['poster']['posters'][0]['link']
-    except IndexError:
-        poster = None
-    return poster
-
-def query_database(movie_name):
-    '''INPUT: string, a correctly spelled movie name
-       OUTPUT: tuple, ("imdb_id","year","genre")
-       RETURN None if movie_name not found '''
-    
-    imdb_id = None
-    year, genre = '', ''
-    found = False
-    for id in ER_movies:
-        if movie_name == ER_movies[id][0]:
-            imdb_id = id
-            year = ER_movies[id][1]
-            genre = ER_movies[id][2]
-            found = True
-    if found:
-        return (imdb_id,year,genre)
-    else:
-        return None
 
 # loads welcome page
 @app.route('/')
 @app.route('/index')
 def index():     
     meme = get_meme() 
-    return render_template("index.j2",meme=meme, movies=ER_movies)
+        
+    # sorting movies by title, year or genre (from button on index page)
+    if 'title' in request.args or 'year' in request.args or 'genre' in request.args:
+        index = None
+        if request.args.get('title'):   index = 0
+        elif request.args.get('year'):  index = 1
+        elif request.args.get('genre'): index = 2
+        
+        sorted_movies = [value for value in sorted(ER_movies.values(), key=lambda item: item[index])]
+        
+        return render_template("index.j2", movies=sorted_movies,meme=meme)
+        
+    else:
+        movies = [value for value in ER_movies.values()]
+        
+        return render_template("index.j2", movies=movies,meme=meme)
+    
 
 # handles the form on the index page
 @app.route('/search')
